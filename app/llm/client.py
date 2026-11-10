@@ -4,6 +4,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 from google import genai
 
+from app.schemas.research import ResearchPlan
+
 BASE_DIR = Path(__file__).resolve().parents[2]
 load_dotenv(BASE_DIR / ".env")
 
@@ -26,3 +28,26 @@ def generate_response(prompt: str) -> str:
     response = client.interactions.create(model=MODEL_NAME, input=prompt)
 
     return response.output_text
+
+
+def generate_research_plan(topic: str) -> ResearchPlan:
+    if not topic or not topic.strip():
+        raise ValueError("Research topic cannot be empty")
+
+    response = client.interactions.create(
+        model=MODEL_NAME,
+        input=f"""
+        Create a detailed research plan for the following topic:
+
+        {topic}
+
+        Include useful research questions and search queries.
+        """,
+        response_format={
+            "type": "text",
+            "mime_type": "application/json",
+            "schema": ResearchPlan.model_json_schema(),
+        },
+    )
+
+    return ResearchPlan.model_validate_json(response.output_text)
