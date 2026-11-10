@@ -3,6 +3,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types
 
 from app.schemas.research import ResearchPlan
 
@@ -18,14 +19,31 @@ if not API_KEY:
 if not MODEL_NAME:
     raise ValueError("GEMINI_MODEL is missing")
 
-client = genai.Client(api_key=API_KEY)
+
+client = genai.Client(
+    api_key=API_KEY,
+    http_options=types.HttpOptions(
+        timeout=30_000,
+        retry_options=types.HttpRetryOptions(
+            attempts=3,
+            initial_delay=1,
+            max_delay=8,
+            exp_base=2,
+            http_status_codes=[408, 429, 500, 502, 503, 504],
+        ),
+    ),
+)
 
 
 def generate_response(prompt: str) -> str:
     if not prompt or not prompt.strip():
         raise ValueError("Prompt cannot be empty")
 
-    response = client.interactions.create(model=MODEL_NAME, input=prompt)
+    response = client.interactions.create(
+        model=MODEL_NAME,
+        input=prompt,
+        timeout=60,
+    )
 
     return response.output_text
 
@@ -48,6 +66,7 @@ def generate_research_plan(topic: str) -> ResearchPlan:
             "mime_type": "application/json",
             "schema": ResearchPlan.model_json_schema(),
         },
+        timeout=60,
     )
 
     return ResearchPlan.model_validate_json(response.output_text)
