@@ -1,6 +1,9 @@
+import pytest
+
 from app.llm.client import generate_research_plan
 
 
+@pytest.mark.live_api
 def test_generate_research_plan():
     plan = generate_research_plan("AI Agent Frameworks")
 
