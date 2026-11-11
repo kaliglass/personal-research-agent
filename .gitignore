@@ -17,3 +17,7 @@ venv/
 
 # OS
 .DS_Store
+
+# Private research documents
+data/library/*
+!data/library/.gitkeep

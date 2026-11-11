@@ -16,7 +16,11 @@ def test_generate_response_success():
 
     assert result == "An AI agent can use tools."
 
-    mock_create.assert_called_once_with(model=MODEL_NAME, input="Explain AI agents")
+    mock_create.assert_called_once_with(
+        model=MODEL_NAME,
+        input="Explain AI agents",
+        timeout=60,
+    )
 
 
 @pytest.mark.parametrize("prompt", ["", "   ", "\n"])

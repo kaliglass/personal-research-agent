@@ -1,0 +1,17 @@
+pyproject.toml
+app/__init__.py
+app/main.py
+app/agents/__init__.py
+app/core/__init__.py
+app/documents/pdf_loader.py
+app/llm/__init__.py
+app/llm/client.py
+app/schemas/__init__.py
+app/schemas/document.py
+app/schemas/research.py
+app/tools/__init__.py
+personal_research_agent.egg-info/PKG-INFO
+personal_research_agent.egg-info/SOURCES.txt
+personal_research_agent.egg-info/dependency_links.txt
+personal_research_agent.egg-info/requires.txt
+personal_research_agent.egg-info/top_level.txt
