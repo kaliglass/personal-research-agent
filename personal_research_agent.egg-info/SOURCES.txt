@@ -3,10 +3,12 @@ app/__init__.py
 app/main.py
 app/agents/__init__.py
 app/core/__init__.py
+app/documents/chunker.py
 app/documents/pdf_loader.py
 app/llm/__init__.py
 app/llm/client.py
 app/schemas/__init__.py
+app/schemas/chunk.py
 app/schemas/document.py
 app/schemas/research.py
 app/tools/__init__.py
