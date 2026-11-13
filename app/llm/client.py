@@ -70,3 +70,19 @@ def generate_research_plan(topic: str) -> ResearchPlan:
     )
 
     return ResearchPlan.model_validate_json(response.output_text)
+
+
+def create_gemini_interaction(
+    *,
+    model: str,
+    input: str,
+    system_instruction: str,
+):
+    """Create a Gemini interaction using the shared configured client."""
+
+    return client.interactions.create(
+        model=model,
+        input=input,
+        system_instruction=system_instruction,
+        timeout=60,
+    )
