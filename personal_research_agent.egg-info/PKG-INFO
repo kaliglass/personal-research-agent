@@ -10,6 +10,7 @@ Requires-Dist: pypdf>=5.0.0
 Requires-Dist: transformers>=4.50.0
 Requires-Dist: sentence-transformers>=3.0.0
 Requires-Dist: numpy>=1.26.0
+Requires-Dist: faiss-cpu>=1.11.0
 Provides-Extra: dev
 Requires-Dist: pytest>=8.0.0; extra == "dev"
 Requires-Dist: ruff>=0.9.0; extra == "dev"

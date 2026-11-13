@@ -21,3 +21,6 @@ venv/
 # Private research documents
 data/library/*
 !data/library/.gitkeep
+
+# Generated FAISS indexes and extracted chunk metadata
+data/index/

@@ -7,6 +7,8 @@ app/documents/chunker.py
 app/documents/pdf_loader.py
 app/llm/__init__.py
 app/llm/client.py
+app/retrieval/__init__.py
+app/retrieval/embeddings.py
 app/schemas/__init__.py
 app/schemas/chunk.py
 app/schemas/document.py

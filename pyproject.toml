@@ -16,6 +16,7 @@ dependencies = [
     "transformers>=4.50.0",
     "sentence-transformers>=3.0.0",
     "numpy>=1.26.0",
+    "faiss-cpu>=1.11.0",
 ]
 
 [project.optional-dependencies]

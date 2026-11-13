@@ -7,6 +7,7 @@ from app.schemas.chunk import DocumentChunk
 
 BGE_MODEL_NAME = "BAAI/bge-base-en-v1.5"
 BGE_EMBEDDING_DIMENSION = 768
+BGE_QUERY_INSTRUCTION = "Represent this sentence for searching relevant passages: "
 
 
 class BGEEmbedder:
@@ -84,3 +85,13 @@ class BGEEmbedder:
         texts = [chunk.text for chunk in chunks]
 
         return self.embed_texts(texts, batch_size=batch_size)
+
+    def embed_query(self, query: str) -> np.ndarray:
+        """Generate an embedding for a retrieval query."""
+
+        if not isinstance(query, str) or not query.strip():
+            raise ValueError("Query must be a non-empty string")
+
+        instructed_query = BGE_QUERY_INSTRUCTION + query.strip()
+
+        return self.embed_texts([instructed_query])
